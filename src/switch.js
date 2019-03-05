@@ -37,6 +37,8 @@ export default class Switch extends Component {
     shadowOffset: PropTypes.object,
     shadowRadius: PropTypes.number,
     shadowOpacity: PropTypes.number,
+    underlayTextColor: PropTypes.string,
+    hasUnderlayText: PropTypes.bool
   };
 
   static defaultProps = {
@@ -67,6 +69,8 @@ export default class Switch extends Component {
     shadowOffset: {width: 0, height: 0},
     shadowRadius: 0,
     shadowOpacity: 1,
+    underlayTextColor: '#fff',
+    hasUnderlayText: false,
   }
 
   constructor(props, context) {
@@ -137,6 +141,8 @@ render() {
       shadowOffset,
       shadowRadius,
       shadowOpacity,
+      underlayTextColor,
+      hasUnderlayText,
     } = this.props;
 
     const backgroundColorValue = backgroundColor.interpolate({
@@ -190,11 +196,25 @@ render() {
                 <Text style={{ color: activeTextColor, fontSize }}>
                   {value ? activeText : ''}
                 </Text>
+                {
+                  hasUnderlayText
+                  ? <Text style={{ color: underlayTextColor, fontSize }}>
+                       {value ? '' : activeText}
+                    </Text>
+                  : null
+                }
               </View>
               <View style={styles.textContainer}>
                 <Text style={{ color: inactiveTextColor, fontSize }}>
                   {value ? '' : inactiveText}
                 </Text>
+                {
+                  hasUnderlayText
+                  ? <Text style={{ color: underlayTextColor, fontSize }}>
+                      {value ? inactiveText : '' }
+                    </Text>
+                  : null
+                }
               </View>
             </View>
           </Animated.View>
@@ -206,7 +226,7 @@ render() {
               borderColor: buttonBorderColor,
               width: buttonWidth,
               height: buttonHeight,
-              zIndex: 3,
+              zIndex: 0,
               position: 'absolute',
               top: (containerHeight - buttonHeight)/2,
               left: transformValue,
