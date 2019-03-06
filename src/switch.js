@@ -38,7 +38,8 @@ export default class Switch extends Component {
     shadowRadius: PropTypes.number,
     shadowOpacity: PropTypes.number,
     underlayTextColor: PropTypes.string,
-    hasUnderlayText: PropTypes.bool
+    hasUnderlayText: PropTypes.bool,
+    fontFamily: PropTypes.string,
   };
 
   static defaultProps = {
@@ -71,6 +72,7 @@ export default class Switch extends Component {
     shadowOpacity: 1,
     underlayTextColor: '#fff',
     hasUnderlayText: false,
+    fontFamily: 'Arial',
   }
 
   constructor(props, context) {
@@ -143,6 +145,7 @@ render() {
       shadowOpacity,
       underlayTextColor,
       hasUnderlayText,
+      fontFamily,
     } = this.props;
 
     const backgroundColorValue = backgroundColor.interpolate({
@@ -193,24 +196,24 @@ render() {
           >
             <View style={styles.animatedContainer}>
               <View style={styles.textContainer}>
-                <Text style={{ color: activeTextColor, fontSize }}>
+                <Text style={{ color: activeTextColor, fontSize, fontFamily }}>
                   {value ? activeText : ''}
                 </Text>
                 {
                   hasUnderlayText
-                  ? <Text style={{ color: underlayTextColor, fontSize }}>
+                  ? <Text style={{ color: underlayTextColor, fontSize, fontFamily }}>
                        {value ? '' : activeText}
                     </Text>
                   : null
                 }
               </View>
               <View style={styles.textContainer}>
-                <Text style={{ color: inactiveTextColor, fontSize }}>
+                <Text style={{ color: inactiveTextColor, fontSize, fontFamily }}>
                   {value ? '' : inactiveText}
                 </Text>
                 {
                   hasUnderlayText
-                  ? <Text style={{ color: underlayTextColor, fontSize }}>
+                  ? <Text style={{ color: underlayTextColor, fontSize, fontFamily }}>
                       {value ? inactiveText : '' }
                     </Text>
                   : null
